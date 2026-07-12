@@ -9,22 +9,23 @@ ConfigurationManager.Enable(ConfigLocations.All);
 
 Application
     .Create()
-    .Run<MainWindow>()
+    .Init()
+    .Run<mainWindow>()
     .Dispose();
 
-namespace tuiPlayer
-{
-    public sealed class MainWindow : Runnable
-    {
-        public MainWindow()
-        {
-            queuePane queuePane = new()
+
+    
+            /*queuePane queuePane = new()
             {
                 Width = Dim.Fill(),
                 Height = Dim.Fill()
             };
 
             Add(queuePane);
-        }
-    }
-}
+            */
+
+            
+        
+
+       
+    
