@@ -125,7 +125,7 @@ namespace tuiPlayer.Views {
             this.Add(this.label);
             this.label5.Width = Dim.Auto();
             this.label5.Height = Dim.Auto();
-            this.label5.X = 144;
+            this.label5.X = Pos.Center();
             this.label5.Y = 41;
             this.label5.Visible = true;
             this.label5.CanFocus = false;
@@ -191,7 +191,7 @@ namespace tuiPlayer.Views {
             this.button2.TextAlignment = Terminal.Gui.ViewBase.Alignment.Center;
             this.button2.IsDefault = false;
             this.Add(this.button2);
-            this.progressBar.Width = 152;
+            this.progressBar.Width = Dim.Fill();
             this.progressBar.Height = 1;
             this.progressBar.X = 2;
             this.progressBar.Y = 45;
