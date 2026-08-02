@@ -41,35 +41,9 @@ namespace tuiPlayer.Views {
         private Terminal.Gui.Views.Button singleButton;
         
         private Terminal.Gui.Views.ProgressBar progressBar;
-        
-        private Terminal.Gui.Views.MenuBar menuBar;
-        
-        private Terminal.Gui.Views.MenuBarItem qUEUEMenu;
-        
-        private Terminal.Gui.Views.MenuItem editMeMenuItem;
-        
-        private Terminal.Gui.Views.MenuBarItem dIRECTORIESMenu;
-        
-        private Terminal.Gui.Views.MenuItem editMeMenuItem2;
-        
-        private Terminal.Gui.Views.MenuBarItem aRTISTSMenu;
-        
-        private Terminal.Gui.Views.MenuItem editMeMenuItem3;
-        
-        private Terminal.Gui.Views.MenuBarItem aLBUMSMenu;
-        
-        private Terminal.Gui.Views.MenuItem editMeMenuItem4;
-        
-        private Terminal.Gui.Views.MenuBarItem pLAYLISTSMenu;
-        
-        private Terminal.Gui.Views.MenuItem editMeMenuItem5;
-        
-        private Terminal.Gui.Views.MenuBarItem sEARCHMenu;
-        
-        private Terminal.Gui.Views.MenuItem editMeMenuItem6;
+      
         
         private void InitializeComponent() {
-            this.menuBar = new Terminal.Gui.Views.MenuBar();
             this.progressBar = new Terminal.Gui.Views.ProgressBar();
             this.singleButton = new Terminal.Gui.Views.Button();
             this.shuffleButton = new Terminal.Gui.Views.Button();
@@ -195,52 +169,7 @@ namespace tuiPlayer.Views {
             this.progressBar.ProgressBarFormat = Terminal.Gui.Views.ProgressBarFormat.Simple;
             this.progressBar.SegmentCharacter = new System.Text.Rune('█');
             this.Add(this.progressBar);
-            this.menuBar.Width = Dim.Fill(0);
-            this.menuBar.Height = Dim.Auto();
-            this.menuBar.X = -1;
-            this.menuBar.Y = 0;
-            this.menuBar.Visible = true;
-            this.menuBar.CanFocus = false;
-            this.menuBar.ShadowStyle = null;
-            this.menuBar.Data = "menuBar";
-            this.menuBar.TextAlignment = Terminal.Gui.ViewBase.Alignment.Start;
-            this.qUEUEMenu = new Terminal.Gui.Views.MenuBarItem();
-            this.qUEUEMenu.Title = "QUEUE";
-            this.editMeMenuItem = new Terminal.Gui.Views.MenuItem();
-            this.editMeMenuItem.Title = "Edit Me";
-            this.qUEUEMenu.PopoverMenu = new PopoverMenu([editMeMenuItem]);
-            this.menuBar.Add(this.qUEUEMenu);
-            this.dIRECTORIESMenu = new Terminal.Gui.Views.MenuBarItem();
-            this.dIRECTORIESMenu.Title = "DIRECTORIES";
-            this.editMeMenuItem2 = new Terminal.Gui.Views.MenuItem();
-            this.editMeMenuItem2.Title = "Edit Me";
-            this.dIRECTORIESMenu.PopoverMenu = new PopoverMenu([editMeMenuItem2]);
-            this.menuBar.Add(this.dIRECTORIESMenu);
-            this.aRTISTSMenu = new Terminal.Gui.Views.MenuBarItem();
-            this.aRTISTSMenu.Title = "ARTISTS";
-            this.editMeMenuItem3 = new Terminal.Gui.Views.MenuItem();
-            this.editMeMenuItem3.Title = "Edit Me";
-            this.aRTISTSMenu.PopoverMenu = new PopoverMenu([editMeMenuItem3]);
-            this.menuBar.Add(this.aRTISTSMenu);
-            this.aLBUMSMenu = new Terminal.Gui.Views.MenuBarItem();
-            this.aLBUMSMenu.Title = "ALBUMS";
-            this.editMeMenuItem4 = new Terminal.Gui.Views.MenuItem();
-            this.editMeMenuItem4.Title = "Edit Me";
-            this.aLBUMSMenu.PopoverMenu = new PopoverMenu([editMeMenuItem4]);
-            this.menuBar.Add(this.aLBUMSMenu);
-            this.pLAYLISTSMenu = new Terminal.Gui.Views.MenuBarItem();
-            this.pLAYLISTSMenu.Title = "PLAYLISTS";
-            this.editMeMenuItem5 = new Terminal.Gui.Views.MenuItem();
-            this.editMeMenuItem5.Title = "Edit Me";
-            this.pLAYLISTSMenu.PopoverMenu = new PopoverMenu([editMeMenuItem5]);
-            this.menuBar.Add(this.pLAYLISTSMenu);
-            this.sEARCHMenu = new Terminal.Gui.Views.MenuBarItem();
-            this.sEARCHMenu.Title = "SEARCH";
-            this.editMeMenuItem6 = new Terminal.Gui.Views.MenuItem();
-            this.editMeMenuItem6.Title = "Edit Me";
-            this.sEARCHMenu.PopoverMenu = new PopoverMenu([editMeMenuItem6]);
-            this.menuBar.Add(this.sEARCHMenu);
-            this.Add(this.menuBar);
+            
         }
     }
 }

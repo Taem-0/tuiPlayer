@@ -8,13 +8,141 @@
 //  </auto-generated>
 // -----------------------------------------------------------------------------
 namespace tuiPlayer.Views {
+    using JetBrains.Annotations;
+    using SkiaSharp;
+    using System.Collections;
     using Terminal.Gui;
-    
-    
+    using Terminal.Gui.App;
+    using Terminal.Gui.Configuration;
+    using Terminal.Gui.Drawing;
+    using Terminal.Gui.ViewBase;
+    using Terminal.Gui.Views;
+    using tuiPlayer;
+    using tuiPlayer.Views;
+    using static Terminal.Gui.Views.SpinnerStyle;
+    using tuiPlayer.Models;
+
+    //using Color = Terminal.Gui.Drawing.Color;
+
+
     public partial class queuePane {
-        
+
+
+        public static Color[,] ConvertToColorArray(SKBitmap image)
+        {
+            int width = image.Width;
+            int height = image.Height;
+            Color[,] colors = new Color[width, height];
+
+            for (var x = 0; x < width; x++)
+            {
+                for (var y = 0; y < height; y++)
+                {
+                    SKColor pixel = image.GetPixel(x, y);
+                    colors[x, y] = new Color(pixel.Red, pixel.Green, pixel.Blue);
+                }
+            }
+
+            return colors;
+        }
+
+
         public queuePane() {
             InitializeComponent();
+
+            using var image = SKBitmap.Decode(File.ReadAllBytes(@"C:\Users\User\source\repos\tuiPlayer\tuiPlayer\Assets\VScover.jpg"));
+
+
+            /*var imageView = new ImageView()
+            {
+                Width = 50,
+                Height = 25,
+                Visible = true,
+                CanFocus = false,
+                ShadowStyle = null,
+                UseRasterGraphics = true
+
+            };*/
+
+
+
+            songCover.Image = ConvertToColorArray(image);
+
+            Add(songCover);
+
+            List<Songs> queue = new List<Songs>()
+            {
+                new Songs { Title = "Sikertelenség", Album = "Rossz Csillag Alatt Született", Artist = "Venetian Snares", Duration = "0:40" },
+                new Songs { Title = "Szerencsétlen", Album = "Rossz Csillag Alatt Született", Artist = "Venetian Snares", Duration = "4:55" },
+                new Songs { Title = "Öngyilkos Vasárnap", Album = "Rossz Csillag Alatt Született", Artist = "Venetian Snares", Duration = "3:26" },
+                new Songs { Title = "Felbomlasztott Mentőkocsi", Album = "Rossz Csillag Alatt Született", Artist = "Venetian Snares", Duration = "3:44" },
+                new Songs { Title = "Hajnal", Album = "Rossz Csillag Alatt Született", Artist = "Venetian Snares", Duration = "7:46" },
+                new Songs { Title = "Galamb Egyedül", Album = "Rossz Csillag Alatt Született", Artist = "Venetian Snares", Duration = "1:36" },
+                new Songs { Title = "Második Galamb", Album = "Rossz Csillag Alatt Született", Artist = "Venetian Snares", Duration = "6:01" },
+                new Songs { Title = "Szamár Madár", Album = "Rossz Csillag Alatt Született", Artist = "Venetian Snares", Duration = "5:49" },
+                new Songs { Title = "Hiszékeny", Album = "Rossz Csillag Alatt Született", Artist = "Venetian Snares", Duration = "1:39" },
+                new Songs { Title = "Kétsarkú Mozgalom", Album = "Rossz Csillag Alatt Született", Artist = "Venetian Snares", Duration = "8:50" },
+                new Songs { Title = "Senki Dala", Album = "Rossz Csillag Alatt Született", Artist = "Venetian Snares", Duration = "2:16" },
+                new Songs { Title = "Deep Dicking", Album = "Filth", Artist = "Venetian Snares", Duration = "5:49" },
+                new Songs { Title = "Crashing The Yogurt Truck", Album = "Filth", Artist = "Venetian Snares", Duration = "5:37" },
+                new Songs { Title = "Labia", Album = "Filth", Artist = "Venetian Snares", Duration = "3:03" },
+                new Songs { Title = "Mongoloid Alien", Album = "Filth", Artist = "Venetian Snares", Duration = "6:26" },
+                new Songs { Title = "Chainsaw Fellatio", Album = "Filth", Artist = "Venetian Snares", Duration = "4:40" },
+                new Songs { Title = "Kimberly Clark", Album = "Filth", Artist = "Venetian Snares", Duration = "6:57" },
+                new Songs { Title = "Calvin Kleining", Album = "Filth", Artist = "Venetian Snares", Duration = "3:49" },
+                new Songs { Title = "Kakarookee Hates Me", Album = "Filth", Artist = "Venetian Snares", Duration = "4:14" },
+                new Songs { Title = "Splooj Guzzlers", Album = "Filth", Artist = "Venetian Snares", Duration = "4:35" },
+                new Songs { Title = "Pussy Skull", Album = "Filth", Artist = "Venetian Snares", Duration = "6:26" },
+                new Songs { Title = "Aanguish", Album = "Meathole", Artist = "Venetian Snares", Duration = "4:42" },
+                new Songs { Title = "Choprite", Album = "Meathole", Artist = "Venetian Snares", Duration = "5:39" },
+                new Songs { Title = "Contain", Album = "Meathole", Artist = "Venetian Snares", Duration = "6:23" },
+                new Songs { Title = "Aamelotasis", Album = "Meathole", Artist = "Venetian Snares", Duration = "5:49" },
+                new Songs { Title = "Des Plaines", Album = "Meathole", Artist = "Venetian Snares", Duration = "7:12" },
+                new Songs { Title = "Sinthasomphone", Album = "Meathole", Artist = "Venetian Snares", Duration = "8:40" },
+                new Songs { Title = "Aaperture", Album = "Meathole", Artist = "Venetian Snares", Duration = "6:17" },
+                new Songs { Title = "Szycag", Album = "Meathole", Artist = "Venetian Snares", Duration = "9:52" },
+                new Songs { Title = "Igor's Theme", Album = "IGOR", Artist = "Tyler, The Creator", Duration = "3:20" },
+                new Songs { Title = "Earfquake", Album = "IGOR", Artist = "Tyler, The Creator", Duration = "3:10" },
+                new Songs { Title = "I Think", Album = "IGOR", Artist = "Tyler, The Creator", Duration = "3:32" },
+                new Songs { Title = "Boyfriend", Album = "IGOR", Artist = "Tyler, The Creator", Duration = "4:00" },
+                new Songs { Title = "Running Out Of Time", Album = "IGOR", Artist = "Tyler, The Creator", Duration = "2:57" },
+                new Songs { Title = "New Magic Wand", Album = "IGOR", Artist = "Tyler, The Creator", Duration = "3:16" },
+                new Songs { Title = "A Boy Is A Gun", Album = "IGOR", Artist = "Tyler, The Creator", Duration = "3:30" },
+                new Songs { Title = "Puppet", Album = "IGOR", Artist = "Tyler, The Creator", Duration = "2:59" },
+                new Songs { Title = "What's Good", Album = "IGOR", Artist = "Tyler, The Creator", Duration = "3:25" },
+                new Songs { Title = "Gone, Gone / Thank You", Album = "IGOR", Artist = "Tyler, The Creator", Duration = "6:15" },
+                new Songs { Title = "I Don't Love You Anymore", Album = "IGOR", Artist = "Tyler, The Creator", Duration = "2:41" },
+                new Songs { Title = "Are We Still Friends?", Album = "IGOR", Artist = "Tyler, The Creator", Duration = "3:47" },
+                new Songs { Title = "Foreword", Album = "Flower Boy", Artist = "Tyler, The Creator", Duration = "3:14" },
+                new Songs { Title = "Where This Flower Blooms", Album = "Flower Boy", Artist = "Tyler, The Creator", Duration = "3:14" },
+                new Songs { Title = "Sometimes...", Album = "Flower Boy", Artist = "Tyler, The Creator", Duration = "0:36" },
+                new Songs { Title = "See You Again", Album = "Flower Boy", Artist = "Tyler, The Creator", Duration = "3:00" },
+                new Songs { Title = "Who Dat Boy", Album = "Flower Boy", Artist = "Tyler, The Creator", Duration = "3:25" },
+                new Songs { Title = "Pothole", Album = "Flower Boy", Artist = "Tyler, The Creator", Duration = "3:57" },
+                new Songs { Title = "Garden Shed", Album = "Flower Boy", Artist = "Tyler, The Creator", Duration = "3:43" },
+                new Songs { Title = "Boredom", Album = "Flower Boy", Artist = "Tyler, The Creator", Duration = "5:20" },
+                new Songs { Title = "I Ain't Got Time!", Album = "Flower Boy", Artist = "Tyler, The Creator", Duration = "3:26" },
+                new Songs { Title = "911 / Mr. Lonely", Album = "Flower Boy", Artist = "Tyler, The Creator", Duration = "4:15" },
+                new Songs { Title = "Droppin' Seeds", Album = "Flower Boy", Artist = "Tyler, The Creator", Duration = "0:59" },
+                new Songs { Title = "November", Album = "Flower Boy", Artist = "Tyler, The Creator", Duration = "3:45" },
+                new Songs { Title = "Glitter", Album = "Flower Boy", Artist = "Tyler, The Creator", Duration = "3:44" },
+                new Songs { Title = "Enjoy Right Now, Today", Album = "Flower Boy", Artist = "Tyler, The Creator", Duration = "3:56" }
+            };
+
+
+            var queueTableData = ((DataTableSource)queueTable.Table).DataTable;
+
+            foreach (var song in queue)
+            {
+                queueTableData.Rows.Add(song.Artist, song.Title, song.Album, song.Duration);
+            }
+
+            
+
+
+
+
         }
+
     }
 }

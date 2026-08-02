@@ -8,11 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="SkiaSharp" Version="4.150.1" />
     <PackageReference Include="Terminal.Gui" Version="2.4.16" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
     <Folder Include="Services\" />
     <Folder Include="Presenters\" />
   </ItemGroup>
