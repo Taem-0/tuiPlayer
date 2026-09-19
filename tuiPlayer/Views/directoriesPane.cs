@@ -8,13 +8,70 @@
 //  </auto-generated>
 // -----------------------------------------------------------------------------
 namespace directoriesPane {
-    using Terminal.Gui;
+  using Terminal.Gui;
+  using System;
+  using System.IO;
+  using System.Collections;
+  using System.Collections.Generic;
+  using System.Collections.ObjectModel;
+
     
-    
-    public partial class directoriesPane {
-        
-        public directoriesPane() {
-            InitializeComponent();
+    public partial class directoriesPane 
+    {
+
+      private ObservableCollection<FileSystemInfo> songList;
+      private DirectoryInfo rootDirectory;
+
+      public directoriesPane() {
+        InitializeComponent();
+      
+        songList = new ObservableCollection<FileSystemInfo>();   
+        rootDirectory = new DirectoryInfo(@"/home/liway/music/");
+
+        this.treeView1.TreeBuilder = 
+        new Terminal.Gui.Views.DelegateTreeBuilder<System.IO.FileSystemInfo>((p) =>
+        {
+          try
+        {
+          return p is System.IO.DirectoryInfo d 
+          ? d.GetDirectories() 
+          : System.Linq.Enumerable.Empty<System.IO.FileSystemInfo>();
         }
+        catch (Exception)
+        {
+          return System.Linq.Enumerable.Empty<System.IO.FileSystemInfo>();
+        }
+        },
+          (p)=>p is System.IO.DirectoryInfo
+        );
+         
+        treeView1.AspectGetter = p => p.Name;
+      
+        treeView1.AddObject(rootDirectory);
+
+        listView.Source = new Terminal.Gui.Views.ListWrapper<FileSystemInfo>(songList);
+
+        treeView1.SelectionChanged += (sender, e) =>
+        {
+          // e.OldValue is the previously selected object
+          // e.NewValue is the newly selected object
+          
+          FileSystemInfo selectedDirectory = e.NewValue;
+
+          if (selectedDirectory is DirectoryInfo directory)
+          {
+            songList.Clear();
+
+            foreach (var file in directory.GetFileSystemInfos())
+             {
+                 songList.Add(file);
+             } 
+          }
+
+        };
+
+      }
+        
+
     }
 }

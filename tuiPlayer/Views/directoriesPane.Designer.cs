@@ -24,10 +24,16 @@ namespace directoriesPane {
     
     public partial class directoriesPane : Terminal.Gui.ViewBase.View {
         
-        private Terminal.Gui.Views.Label label;
+        private Terminal.Gui.Views.TreeView<System.IO.FileSystemInfo> treeView1;
+        
+        private Terminal.Gui.Views.ListView listView;
+        
+        private Terminal.Gui.Views.FrameView frameView;
         
         private void InitializeComponent() {
-            this.label = new Terminal.Gui.Views.Label();
+            this.frameView = new Terminal.Gui.Views.FrameView();
+            this.listView = new Terminal.Gui.Views.ListView();
+            this.treeView1 = new Terminal.Gui.Views.TreeView<System.IO.FileSystemInfo>();
             this.Width = Dim.Fill(0);
             this.Height = Dim.Fill(0);
             this.X = 0;
@@ -36,17 +42,63 @@ namespace directoriesPane {
             this.CanFocus = false;
             this.ShadowStyle = null;
             this.TextAlignment = Terminal.Gui.ViewBase.Alignment.Start;
-            this.label.Width = Dim.Auto();
-            this.label.Height = Dim.Auto();
-            this.label.X = 73;
-            this.label.Y = 22;
-            this.label.Visible = true;
-            this.label.CanFocus = false;
-            this.label.ShadowStyle = null;
-            this.label.Data = "label";
-            this.label.Text = "DIRECTORIES";
-            this.label.TextAlignment = Terminal.Gui.ViewBase.Alignment.Start;
-            this.Add(this.label);
+            this.treeView1.Width = 67;
+            this.treeView1.Height = 65;
+            this.treeView1.X = 0;
+            this.treeView1.Y = 1;
+            this.treeView1.Visible = true;
+            this.treeView1.CanFocus = true;
+            this.treeView1.ShadowStyle = null;
+            this.treeView1.Data = "treeView1";
+            this.treeView1.Text = "";
+            this.treeView1.TextAlignment = Terminal.Gui.ViewBase.Alignment.Start;
+            this.treeView1.Style.CollapseableSymbol = new System.Text.Rune('-');
+            this.treeView1.Style.ColorExpandSymbol = false;
+            this.treeView1.Style.ExpandableSymbol = new System.Text.Rune('+');
+            this.treeView1.Style.InvertExpandSymbolColors = false;
+            this.treeView1.Style.ShowBranchLines = true;
+            this.treeView1.AddObjects(new System.IO.FileSystemInfo[0]);
+            this.treeView1.TreeBuilder = 
+new Terminal.Gui.Views.DelegateTreeBuilder<System.IO.FileSystemInfo>((p) =>
+{
+    try
+    {
+        return p is System.IO.DirectoryInfo d ? d.GetFileSystemInfos() : System.Linq.Enumerable.Empty<System.IO.FileSystemInfo>();
+    }
+    catch (Exception)
+    {
+        return System.Linq.Enumerable.Empty<System.IO.FileSystemInfo>();
+    }
+},
+(p)=>p is System.IO.DirectoryInfo
+);
+            this.Add(this.treeView1);
+            this.listView.Width = 67;
+            this.listView.Height = 65;
+            this.listView.X = 68;
+            this.listView.Y = 1;
+            this.listView.Visible = true;
+            this.listView.CanFocus = true;
+            this.listView.ShadowStyle = null;
+            this.listView.Data = "listView";
+            this.listView.TextAlignment = Terminal.Gui.ViewBase.Alignment.Start;
+            this.listView.Source = new Terminal.Gui.Views.ListWrapper<string>(new System.Collections.ObjectModel.ObservableCollection<string>(new string[] {
+                            "Item1",
+                            "Item2",
+                            "Item3"}));
+            this.Add(this.listView);
+            this.frameView.Width = 102;
+            this.frameView.Height = 65;
+            this.frameView.X = 137;
+            this.frameView.Y = 1;
+            this.frameView.Visible = true;
+            this.frameView.Arrangement = Terminal.Gui.ViewBase.ViewArrangement.Fixed;
+            this.frameView.CanFocus = true;
+            this.frameView.ShadowStyle = null;
+            this.frameView.Data = "frameView";
+            this.frameView.TextAlignment = Terminal.Gui.ViewBase.Alignment.Start;
+            this.frameView.Title = "Song";
+            this.Add(this.frameView);
         }
     }
 }

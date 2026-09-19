@@ -50,7 +50,7 @@ namespace tuiPlayer.Views {
         public queuePane() {
             InitializeComponent();
 
-            using var image = SKBitmap.Decode(File.ReadAllBytes(@"C:\Users\User\source\repos\tuiPlayer\tuiPlayer\Assets\VScover.jpg"));
+            using var image = SKBitmap.Decode(File.ReadAllBytes(@"Assets/VScover.jpg"));
 
 
             /*var imageView = new ImageView()
